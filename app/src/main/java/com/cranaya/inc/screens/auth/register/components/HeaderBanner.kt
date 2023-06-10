@@ -32,7 +32,7 @@ fun HeaderBanner() {
                 .height(100.dp)
                 .width(100.dp)
                 .padding(top = 20.dp),
-            painter = painterResource(id = R.drawable.user_image),
+            painter = painterResource(id = R.drawable.user_form),
             contentDescription = "user image"
         )
         Text(
