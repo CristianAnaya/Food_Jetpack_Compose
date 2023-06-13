@@ -9,6 +9,7 @@ import com.cranaya.inc.navigation.Graph
 import com.cranaya.inc.navigation.screen.AuthScreen
 import com.cranaya.inc.screens.auth.register.RegisterScreen
 import com.cranaya.inc.screens.auth.login.LoginScreen
+import com.cranaya.inc.screens.home.HomeScreen
 
 
 fun NavGraphBuilder.AuthNavGraph(navController: NavHostController) {
@@ -26,6 +27,10 @@ fun NavGraphBuilder.AuthNavGraph(navController: NavHostController) {
             route = AuthScreen.Register.route
         ) {
             RegisterScreen(navController = navController)
+        }
+
+        composable(route = AuthScreen.Home.route) {
+            HomeScreen(navController = navController)
         }
     }
 }

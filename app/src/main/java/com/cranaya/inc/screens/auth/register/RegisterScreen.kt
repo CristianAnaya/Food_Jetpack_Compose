@@ -6,6 +6,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.cranaya.inc.components.DefaultTopBar
+import com.cranaya.inc.screens.auth.register.components.Register
 import com.cranaya.inc.screens.auth.register.components.RegisterContent
 import com.cranaya.inc.ui.theme.RedworkTheme
 
@@ -22,6 +23,7 @@ fun RegisterScreen(navController: NavHostController) {
     ) { paddingValues ->
         RegisterContent(paddingValues = paddingValues)
     }
+    Register(navController = navController)
 }
 
 @Preview(showBackground = true, showSystemUi = true)

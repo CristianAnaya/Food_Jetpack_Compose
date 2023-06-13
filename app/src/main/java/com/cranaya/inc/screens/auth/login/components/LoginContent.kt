@@ -60,6 +60,7 @@ fun LoginContent(
     LaunchedEffect(key1 = viewModel.errorMessage) {
         if (viewModel.errorMessage != "") {
             Toast.makeText(context, viewModel.errorMessage, Toast.LENGTH_LONG).show()
+            viewModel.errorMessage = ""
         }
     }
     
@@ -148,7 +149,7 @@ fun LoginContent(
                             .fillMaxWidth()
                             .height(50.dp),
                         text = "Sign in",
-                        onClick = { viewModel.validateForm() }
+                        onClick = { viewModel.login() }
                     )
 
                     Row(

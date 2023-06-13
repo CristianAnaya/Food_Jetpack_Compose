@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.cranaya.inc.screens.auth.login.components.Login
 import com.cranaya.inc.screens.auth.login.components.LoginContent
 import com.cranaya.inc.ui.theme.RedworkTheme
 
@@ -16,6 +17,7 @@ fun LoginScreen(navController: NavHostController) {
             paddingValues
         )
     }
+    Login(navController = navController)
 }
 
 @Preview(showBackground = true, showSystemUi = true)

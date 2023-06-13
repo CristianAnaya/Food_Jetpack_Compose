@@ -61,6 +61,7 @@ fun RegisterContent(
     LaunchedEffect(key1 = viewModel.errorMessage) {
         if (viewModel.errorMessage != "") {
             Toast.makeText(context, viewModel.errorMessage, Toast.LENGTH_LONG).show()
+            viewModel.errorMessage = ""
         }
     }
     
@@ -122,7 +123,7 @@ fun RegisterContent(
                     DefaultTextField(
                         modifier = Modifier.fillMaxWidth(),
                         value = state.email,
-                        onValueChange = { viewModel.onPasswordInput(it) },
+                        onValueChange = { viewModel.onEmailInput(it) },
                         label = "Email",
                         icon = Icons.Default.Email,
                         keyboardType = KeyboardType.Email
@@ -164,7 +165,7 @@ fun RegisterContent(
                             .fillMaxWidth()
                             .height(50.dp),
                         text = "Confirm",
-                        onClick = { viewModel.validateForm() }
+                        onClick = { viewModel.register() }
                     )
                 }
             }
