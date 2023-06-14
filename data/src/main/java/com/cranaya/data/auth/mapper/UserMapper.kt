@@ -10,7 +10,8 @@ fun UserDto.toUser(): User {
         lastname = lastname,
         email = email,
         phone = phone,
-        image = image
+        image = image,
+        roles = roles?.map { it.toRol() }
     )
 }
 
@@ -22,6 +23,7 @@ fun User.toUserDto(): UserDto {
         email = email,
         phone = phone,
         image = image,
-        password = password
+        password = password,
+        roles = roles?.map { it.toRolDto() }
     )
 }

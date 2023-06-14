@@ -7,6 +7,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.cranaya.domain.auth.model.Auth
 import com.cranaya.domain.auth.model.User
 import com.cranaya.domain.auth.usecase.AuthUseCase
 import com.cranaya.domain.shared.Resource
@@ -23,15 +24,27 @@ class LoginViewModel @Inject constructor(private val authUseCase: AuthUseCase): 
     var errorMessage by mutableStateOf("")
 
     // LOGIN RESPONSE
-    var loginResource by mutableStateOf<Resource<User>?>(null)
+    var loginResource by mutableStateOf<Resource<Auth>?>(null)
         private set
+
+    init {
+        getSessionData()
+    }
+
+    private fun getSessionData() = viewModelScope.launch {
+        authUseCase.getSessionData().collect() { data ->
+            if (!data.token.isNullOrBlank()) {
+                Log.d("LoginViewModel", "getSessionData: $data")
+                loginResource = Resource.Success(data)
+            }
+        }
+    }
 
     fun login() = viewModelScope.launch {
         if (isValidForm()) {
             loginResource = Resource.Loading
             val result = authUseCase.login(state.email, state.password)
             loginResource = result
-            Log.d("LoginViewModel", "Response: $loginResource")
         }
     }
 

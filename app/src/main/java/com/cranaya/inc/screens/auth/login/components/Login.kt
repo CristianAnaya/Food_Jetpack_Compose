@@ -13,7 +13,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.cranaya.domain.shared.Resource
 import com.cranaya.inc.components.ProgressBar
+import com.cranaya.inc.navigation.Graph
 import com.cranaya.inc.navigation.screen.AuthScreen
+import com.cranaya.inc.navigation.screen.RolesScreen
 import com.cranaya.inc.screens.auth.login.LoginViewModel
 
 @Composable
@@ -25,7 +27,16 @@ fun Login(navController: NavHostController, viewModel: LoginViewModel = hiltView
        }
        is Resource.Success -> {
             LaunchedEffect(Unit) {
-                navController.navigate(route = AuthScreen.Home.route)
+                if (response.data.user?.roles?.size!! > 1) {
+                    navController.navigate(route = Graph.ROLES) {
+                        popUpTo(Graph.AUTH) { inclusive = true }
+                    }
+                } else {
+                    navController.navigate(route = Graph.CLIENT) {
+                        popUpTo(Graph.AUTH) { inclusive = true }
+                    }
+                }
+
             }
        }
        is Resource.Failure -> {

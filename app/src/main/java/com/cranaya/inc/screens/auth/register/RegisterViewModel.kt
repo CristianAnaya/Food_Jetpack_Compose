@@ -6,12 +6,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.cranaya.data.auth.model.dto.AuthResponse
+import com.cranaya.domain.auth.model.Auth
 import com.cranaya.domain.auth.model.User
 import com.cranaya.domain.auth.usecase.AuthUseCase
 import com.cranaya.domain.shared.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -20,7 +19,7 @@ class RegisterViewModel @Inject constructor(private val authUseCase: AuthUseCase
 
     var state by mutableStateOf(RegisterState())
         private set
-    var registerResponse by mutableStateOf<Resource<User>?>(null)
+    var registerResponse by mutableStateOf<Resource<Auth>?>(null)
         private set
     var errorMessage by mutableStateOf("")
 

@@ -11,7 +11,8 @@ data class UserDto(
     @SerializedName("phone") val phone: String,
     @SerializedName("image") val image: String? = null,
     @SerializedName("password") val password: String? =null,
-    @SerializedName("notification_token") val notificationToken: String? = null
+    @SerializedName("notification_token") val notificationToken: String? = null,
+    @SerializedName("roles") val roles: List<RolDto>? = null
 ) {
     fun toJson(): String = Gson().toJson(this)
 

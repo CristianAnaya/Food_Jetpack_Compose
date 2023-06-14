@@ -23,7 +23,9 @@ fun Register(navController: NavHostController, viewModel: RegisterViewModel = hi
         is Resource.Loading -> { ProgressBar() }
         is Resource.Success -> {
             LaunchedEffect(Unit) {
-                navController.navigate(route = AuthScreen.Home.route)
+//                navController.navigate(route = AuthScreen.Home.route) {
+//                    popUpTo(AuthScreen.Login.route) { inclusive = true }
+//                }
             }
         }
         is Resource.Failure -> {

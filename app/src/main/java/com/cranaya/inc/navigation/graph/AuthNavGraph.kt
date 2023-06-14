@@ -7,9 +7,11 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.cranaya.inc.navigation.Graph
 import com.cranaya.inc.navigation.screen.AuthScreen
+import com.cranaya.inc.screens.admin.home.AdminHomeScreen
 import com.cranaya.inc.screens.auth.register.RegisterScreen
 import com.cranaya.inc.screens.auth.login.LoginScreen
-import com.cranaya.inc.screens.home.HomeScreen
+import com.cranaya.inc.screens.client.home.ClientHomeScreen
+import com.cranaya.inc.screens.roles.RolesScreen
 
 
 fun NavGraphBuilder.AuthNavGraph(navController: NavHostController) {
@@ -23,14 +25,9 @@ fun NavGraphBuilder.AuthNavGraph(navController: NavHostController) {
             LoginScreen(navController = navController)
         }
 
-        composable(
-            route = AuthScreen.Register.route
-        ) {
+        composable(route = AuthScreen.Register.route) {
             RegisterScreen(navController = navController)
         }
-
-        composable(route = AuthScreen.Home.route) {
-            HomeScreen(navController = navController)
-        }
     }
+
 }

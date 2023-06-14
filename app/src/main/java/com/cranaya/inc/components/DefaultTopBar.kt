@@ -21,7 +21,7 @@ fun DefaultTopBar(
     TopAppBar(
         title = {
             Text(
-                text = "Register",
+                text = title,
                 fontSize = 19.sp
             )
         },
