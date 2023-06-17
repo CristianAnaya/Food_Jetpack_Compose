@@ -3,7 +3,7 @@ package com.cranaya.data.auth.repository
 import com.cranaya.data.auth.repository.dataSource.AuthRemoteDataSource
 import com.cranaya.data.auth.repository.dataSource.AuthTemporalDataSource
 import com.cranaya.domain.auth.model.Auth
-import com.cranaya.domain.auth.model.User
+import com.cranaya.domain.user.model.User
 import com.cranaya.domain.auth.repository.AuthRepository
 import com.cranaya.domain.shared.Resource
 import kotlinx.coroutines.flow.Flow
@@ -38,5 +38,7 @@ class AuthRepositoryImpl(
     override fun getSessionData(): Flow<Auth> {
         return authTemporalDataSource.getSessionData()
     }
+
+    override suspend fun logout() = authTemporalDataSource.logout()
 
 }

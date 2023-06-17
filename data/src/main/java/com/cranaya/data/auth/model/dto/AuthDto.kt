@@ -1,5 +1,6 @@
 package com.cranaya.data.auth.model.dto
 
+import android.util.Log
 import com.google.gson.Gson
 
 data class AuthDto(
@@ -10,6 +11,9 @@ data class AuthDto(
     fun toJson(): String = Gson().toJson(this)
 
     companion object {
-        fun fromJson(data: String): AuthDto = Gson().fromJson(data, AuthDto::class.java)
+        fun fromJson(data: String): AuthDto {
+            Log.d("UserDto", "fromJson: $data, $${Gson().fromJson(data, AuthDto::class.java)}")
+            return Gson().fromJson(data, AuthDto::class.java)
+        }
     }
 }

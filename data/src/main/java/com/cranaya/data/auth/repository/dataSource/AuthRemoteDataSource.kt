@@ -1,7 +1,7 @@
 package com.cranaya.data.auth.repository.dataSource
 
 import com.cranaya.domain.auth.model.Auth
-import com.cranaya.domain.auth.model.User
+import com.cranaya.domain.user.model.User
 import com.cranaya.domain.shared.Resource
 
 interface AuthRemoteDataSource {

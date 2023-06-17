@@ -15,7 +15,6 @@ import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.cranaya.domain.auth.model.Rol
 import com.cranaya.inc.navigation.Graph
-import com.cranaya.inc.navigation.screen.AuthScreen
 
 @Composable
 fun RolesItem(rol: Rol, navController: NavHostController) {

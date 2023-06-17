@@ -1,5 +1,6 @@
 package com.cranaya.data.auth.repository.dataSourceImpl
 
+import android.util.Log
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
@@ -32,10 +33,18 @@ class AuthTemporalDataSourceImpl constructor(
         val dataStoreKey = stringPreferencesKey(AUTH_KEY)
         return dataStore.data.map { pref ->
             if (pref[dataStoreKey] != null) {
+                Log.d("AuthTemporalDataSourceImpl", "getSessionData: ${AuthDto.fromJson(pref[dataStoreKey] ?: "").toAuth()}")
                 AuthDto.fromJson(pref[dataStoreKey] ?: "").toAuth()
             } else {
                 AuthDto().toAuth()
             }
+        }
+    }
+
+    override suspend fun logout() {
+        val dataStoreKey = stringPreferencesKey(AUTH_KEY)
+        dataStore.edit { pref ->
+            pref.remove(dataStoreKey)
         }
     }
 

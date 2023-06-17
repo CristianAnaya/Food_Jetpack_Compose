@@ -9,7 +9,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.cranaya.inc.navigation.graph.RootNavGraph
+import com.cranaya.inc.navigation.graph.root.RootNavGraph
 import com.cranaya.inc.ui.theme.RedworkTheme
 import dagger.hilt.android.AndroidEntryPoint
 

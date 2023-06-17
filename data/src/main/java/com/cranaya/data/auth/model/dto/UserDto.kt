@@ -7,10 +7,10 @@ data class UserDto(
     @SerializedName("id") val id: String? = null,
     @SerializedName("name") val name: String,
     @SerializedName("lastname") val lastname: String,
-    @SerializedName("email") val email: String,
+    @SerializedName("email") val email: String? = null,
     @SerializedName("phone") val phone: String,
     @SerializedName("image") val image: String? = null,
-    @SerializedName("password") val password: String? =null,
+    @SerializedName("password") val password: String? = null,
     @SerializedName("notification_token") val notificationToken: String? = null,
     @SerializedName("roles") val roles: List<RolDto>? = null
 ) {

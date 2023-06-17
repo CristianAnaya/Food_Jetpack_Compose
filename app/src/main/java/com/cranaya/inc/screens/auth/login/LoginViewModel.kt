@@ -8,7 +8,6 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cranaya.domain.auth.model.Auth
-import com.cranaya.domain.auth.model.User
 import com.cranaya.domain.auth.usecase.AuthUseCase
 import com.cranaya.domain.shared.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel

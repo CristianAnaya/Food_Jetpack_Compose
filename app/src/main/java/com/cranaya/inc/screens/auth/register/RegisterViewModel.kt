@@ -7,9 +7,10 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cranaya.domain.auth.model.Auth
-import com.cranaya.domain.auth.model.User
+import com.cranaya.domain.user.model.User
 import com.cranaya.domain.auth.usecase.AuthUseCase
 import com.cranaya.domain.shared.Resource
+import com.cranaya.inc.screens.auth.register.mapper.toUser
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -25,15 +26,8 @@ class RegisterViewModel @Inject constructor(private val authUseCase: AuthUseCase
 
     fun register() = viewModelScope.launch {
         if (isValidForm()) {
-            val user = User(
-                name = state.name,
-                lastname = state.lastname,
-                phone = state.phone,
-                email = state.email,
-                password = state.password
-            )
             registerResponse = Resource.Loading
-            val result = authUseCase.register(user = user)
+            val result = authUseCase.register(user = state.toUser())
             registerResponse = result
         }
     }

@@ -38,13 +38,12 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.cranaya.inc.components.DefaultButton
 import com.cranaya.inc.components.DefaultTextField
 import com.cranaya.inc.ui.theme.Blue700
 import com.cranaya.inc.R
-import com.cranaya.inc.navigation.screen.AuthScreen
+import com.cranaya.inc.navigation.screen.auth.AuthScreen
 import com.cranaya.inc.screens.auth.login.LoginViewModel
 
 @Composable

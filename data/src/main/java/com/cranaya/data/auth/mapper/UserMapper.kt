@@ -1,7 +1,7 @@
 package com.cranaya.data.auth.mapper
 
 import com.cranaya.data.auth.model.dto.UserDto
-import com.cranaya.domain.auth.model.User
+import com.cranaya.domain.user.model.User
 
 fun UserDto.toUser(): User {
     return User(
