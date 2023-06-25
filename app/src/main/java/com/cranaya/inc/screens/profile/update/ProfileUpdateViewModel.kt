@@ -51,7 +51,25 @@ class ProfileUpdateViewModel @Inject constructor(
         )
     }
 
-    fun update() = viewModelScope.launch {
+    fun onUpdate() {
+        if (file != null) {
+            updateWithImage()
+        } else {
+            update()
+        }
+    }
+
+    private fun updateWithImage() = viewModelScope.launch {
+        updateResponse = Resource.Loading
+        val result = userUseCase.updateUserWithImage(user.id ?: "", state.toUser(), file!!)
+        updateResponse = result
+    }
+
+    fun updateUserSession(userResponse: User) = viewModelScope.launch {
+        authUseCase.updateSession(userResponse)
+    }
+
+    private fun update() = viewModelScope.launch {
         updateResponse = Resource.Loading
         val result = userUseCase.updateUser(user.id ?: "", state.toUser())
         updateResponse = result
@@ -69,7 +87,7 @@ class ProfileUpdateViewModel @Inject constructor(
         val result = resultingActivityHandler.takePicturePreview()
         if (result != null) {
             state = state.copy(image = ComposeFileProvider.getPathFromBitmap(context, result))
-            file = File(state.image)
+            file = state.image?.let { File(it) }
         }
     }
 

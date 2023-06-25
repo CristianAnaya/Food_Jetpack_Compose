@@ -9,5 +9,6 @@ interface AuthRepository {
     suspend fun login(email: String, password: String): Resource<Auth>
     suspend fun register(user: User): Resource<Auth>
     fun getSessionData(): Flow<Auth>
+    suspend fun updateSession(user: User)
     suspend fun logout()
 }

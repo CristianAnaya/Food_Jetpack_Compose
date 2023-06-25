@@ -2,6 +2,7 @@ package com.cranaya.inc.di.user
 
 import com.cranaya.domain.user.repository.UserRepository
 import com.cranaya.domain.user.usecase.UpdateUserUseCase
+import com.cranaya.domain.user.usecase.UpdateUserWithImageUseCase
 import com.cranaya.domain.user.usecase.UserUseCase
 import dagger.Module
 import dagger.Provides
@@ -14,7 +15,8 @@ object UserDependencyInjection {
 
     @Provides
     fun providesUserUseCase(userRepository: UserRepository) = UserUseCase(
-        updateUser = UpdateUserUseCase(userRepository = userRepository)
+        updateUser = UpdateUserUseCase(userRepository = userRepository),
+        updateUserWithImage = UpdateUserWithImageUseCase(userRepository = userRepository)
     )
 
 }

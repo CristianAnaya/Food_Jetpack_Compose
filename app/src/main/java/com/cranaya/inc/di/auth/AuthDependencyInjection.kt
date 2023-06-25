@@ -6,6 +6,7 @@ import com.cranaya.domain.auth.usecase.GetSessionDataUseCase
 import com.cranaya.domain.auth.usecase.LoginUseCase
 import com.cranaya.domain.auth.usecase.LogoutUseCase
 import com.cranaya.domain.auth.usecase.RegisterUseCase
+import com.cranaya.domain.auth.usecase.UpdateSessionUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,6 +22,7 @@ object AuthDependencyInjection {
         login = LoginUseCase(authRepository = authRepository),
         register = RegisterUseCase(authRepository = authRepository),
         getSessionData = GetSessionDataUseCase(authRepository = authRepository),
-        logout = LogoutUseCase(authRepository = authRepository)
+        logout = LogoutUseCase(authRepository = authRepository),
+        updateSession = UpdateSessionUseCase(authRepository = authRepository)
     )
 }

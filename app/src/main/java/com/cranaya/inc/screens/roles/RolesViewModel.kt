@@ -1,5 +1,6 @@
 package com.cranaya.inc.screens.roles
 
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -24,6 +25,7 @@ class RolesViewModel @Inject constructor(private val authUseCase: AuthUseCase): 
     private fun getSessionData() = viewModelScope.launch {
         authUseCase.getSessionData().collect() { data ->
             if (!data.token.isNullOrBlank()) {
+                Log.d("RolesViewModel", "getSessionData: $data")
                 auth = data
             }
         }

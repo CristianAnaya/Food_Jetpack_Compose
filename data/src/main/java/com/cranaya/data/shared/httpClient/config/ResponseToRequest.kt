@@ -1,7 +1,5 @@
 package com.cranaya.data.shared.httpClient.config
 
-import com.cranaya.data.auth.mapper.toUser
-import com.cranaya.data.auth.mapper.toUserDto
 import com.cranaya.data.shared.httpClient.model.ErrorResponse
 import com.cranaya.domain.shared.Resource
 import retrofit2.HttpException

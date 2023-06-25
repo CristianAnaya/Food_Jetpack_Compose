@@ -10,8 +10,11 @@ import com.cranaya.data.auth.mapper.toAuthDto
 import com.cranaya.data.auth.model.dto.AuthDto
 import com.cranaya.data.auth.repository.dataSource.AuthTemporalDataSource
 import com.cranaya.domain.auth.model.Auth
+import com.cranaya.domain.user.model.User
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.runBlocking
 
 class AuthTemporalDataSourceImpl constructor(
     private val dataStore: DataStore<Preferences>
@@ -38,6 +41,19 @@ class AuthTemporalDataSourceImpl constructor(
             } else {
                 AuthDto().toAuth()
             }
+        }
+    }
+
+    override suspend fun updateSessionData(user: User) {
+        val dataStoreKey = stringPreferencesKey(AUTH_KEY)
+        val auth = runBlocking { getSessionData().first() }
+        auth.user?.name = user.name
+        auth.user?.lastname = user.lastname
+        auth.user?.phone = user.phone
+        if (!user.image.isNullOrBlank()) auth.user?.image = user.image
+
+        dataStore.edit { pref ->
+            pref[dataStoreKey] = auth.toAuthDto().toJson()
         }
     }
 

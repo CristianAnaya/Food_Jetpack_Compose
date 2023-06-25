@@ -39,6 +39,8 @@ class AuthRepositoryImpl(
         return authTemporalDataSource.getSessionData()
     }
 
+    override suspend fun updateSession(user: User) = authTemporalDataSource.updateSessionData(user)
+
     override suspend fun logout() = authTemporalDataSource.logout()
 
 }

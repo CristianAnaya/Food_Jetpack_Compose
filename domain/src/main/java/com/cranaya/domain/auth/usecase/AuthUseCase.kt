@@ -4,5 +4,6 @@ data class AuthUseCase(
     val login: LoginUseCase,
     val register: RegisterUseCase,
     val getSessionData: GetSessionDataUseCase,
-    val logout: LogoutUseCase
+    val logout: LogoutUseCase,
+    val updateSession: UpdateSessionUseCase
 )

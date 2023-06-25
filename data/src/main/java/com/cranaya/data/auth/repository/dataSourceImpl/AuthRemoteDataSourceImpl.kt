@@ -1,7 +1,7 @@
 package com.cranaya.data.auth.repository.dataSourceImpl
 
 import com.cranaya.data.auth.mapper.toAuth
-import com.cranaya.data.auth.mapper.toUserDto
+import com.cranaya.data.user.mapper.toUserDto
 import com.cranaya.data.auth.repository.dataSource.AuthRemoteDataSource
 import com.cranaya.data.auth.service.AuthService
 import com.cranaya.data.shared.httpClient.config.ResponseToRequest

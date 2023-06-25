@@ -159,7 +159,7 @@ fun ProfileUpdateContent(
                     DefaultButton(
                         modifier = Modifier.fillMaxWidth(),
                         text = "Confirmar",
-                        onClick = { viewModel.update() }
+                        onClick = { viewModel.onUpdate() }
                     )
                 }
             }

@@ -1,7 +1,7 @@
 package com.cranaya.data.auth.service
 
 import com.cranaya.data.auth.model.dto.AuthDto
-import com.cranaya.data.auth.model.dto.UserDto
+import com.cranaya.data.user.model.UserDto
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.Field

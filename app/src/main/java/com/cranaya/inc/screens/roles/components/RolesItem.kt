@@ -1,5 +1,6 @@
 package com.cranaya.inc.screens.roles.components
 
+import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -24,7 +25,7 @@ fun RolesItem(rol: Rol, navController: NavHostController) {
         }
     }) {
         Spacer(modifier = Modifier.height(10.dp))
-
+        Log.d("RolesItem", "RolesItem: ${rol.image}")
         AsyncImage(
             modifier = Modifier
                 .height(150.dp)

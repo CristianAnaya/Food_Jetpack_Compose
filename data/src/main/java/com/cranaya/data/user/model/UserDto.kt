@@ -1,5 +1,6 @@
-package com.cranaya.data.auth.model.dto
+package com.cranaya.data.user.model
 
+import com.cranaya.data.auth.model.dto.RolDto
 import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
 
