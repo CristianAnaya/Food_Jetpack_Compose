@@ -1,5 +1,6 @@
 package com.cranaya.data.category.repository.dataSource
 
+import com.cranaya.data.category.persistence.entity.CategoryEntity
 import com.cranaya.domain.category.model.Category
 import kotlinx.coroutines.flow.Flow
 

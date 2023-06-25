@@ -1,5 +1,6 @@
 package com.cranaya.data.category.repository.dataSourceImpl
 
+import android.util.Log
 import com.cranaya.data.category.mapper.toCategory
 import com.cranaya.data.category.mapper.toCategoryEntity
 import com.cranaya.data.category.persistence.dao.CategoriesDao

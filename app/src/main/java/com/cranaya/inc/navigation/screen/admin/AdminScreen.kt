@@ -12,16 +12,16 @@ sealed class AdminScreen(
     val icon: ImageVector
 ) {
     object CategoryList: AdminScreen(
-        route = "admincategory/list",
+        route = "admin/category/list",
         title = "Categorias",
         icon = Icons.Default.Check
     )
 
-    object ProductList: AdminScreen(
-        route = "admin/product/list",
-        title = "Productos",
-        icon = Icons.Default.List
-    )
+//    object ProductList: AdminScreen(
+//        route = "admin/product/list",
+//        title = "Productos",
+//        icon = Icons.Default.List
+//    )
 
     object Profile: AdminScreen(
         route = "admin/profile",

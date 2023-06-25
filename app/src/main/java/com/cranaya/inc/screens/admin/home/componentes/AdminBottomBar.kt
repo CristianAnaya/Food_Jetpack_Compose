@@ -11,7 +11,6 @@ import com.cranaya.inc.navigation.screen.admin.AdminScreen
 fun AdminBottomBar(navController: NavHostController) {
 
     val screens = listOf(
-        AdminScreen.ProductList,
         AdminScreen.CategoryList,
         AdminScreen.Profile
     )

@@ -14,6 +14,7 @@ import androidx.navigation.NavHostController
 import com.cranaya.inc.components.DefaultTopBar
 import com.cranaya.inc.navigation.Graph
 import com.cranaya.inc.screens.admin.categotry.list.components.AdminCategoryListContent
+import com.cranaya.inc.screens.admin.categotry.list.components.DeleteCategory
 import com.cranaya.inc.screens.admin.categotry.list.components.GetCategories
 import com.cranaya.inc.screens.client.category.list.components.ClientCategoryListContent
 
@@ -36,4 +37,5 @@ fun AdminCategoryListScreen(navController: NavHostController) {
         GetCategories(navController = navController, paddingValues = it)
     }
 
+    DeleteCategory()
 }

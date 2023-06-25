@@ -1,4 +1,4 @@
-package com.cranaya.inc.screens.admin.categotry.list
+package com.cranaya.inc.screens.client.category.list
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -9,16 +9,14 @@ import com.cranaya.domain.category.model.Category
 import com.cranaya.domain.category.usecase.CategoryUseCase
 import com.cranaya.domain.shared.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class AdminCategoryListViewModel @Inject constructor(private val categoryUseCase: CategoryUseCase): ViewModel() {
+class ClientCategoryListViewModel @Inject constructor(private val categoryUseCase: CategoryUseCase): ViewModel() {
 
     var categoriesResponse by mutableStateOf<Resource<List<Category>>?>(null)
-        private set
-
-    var deleteCategoryResponse by mutableStateOf<Resource<Unit>?>(null)
         private set
 
     init {
@@ -27,15 +25,8 @@ class AdminCategoryListViewModel @Inject constructor(private val categoryUseCase
 
     private fun getCategories() = viewModelScope.launch {
         categoriesResponse = Resource.Loading
-        categoryUseCase.getCategory().collect { data ->
-            categoriesResponse = data
+        categoryUseCase.getCategory().collect {
+            categoriesResponse = it
         }
     }
-
-    fun deleteCategory(id: String) = viewModelScope.launch {
-        deleteCategoryResponse = Resource.Loading
-        val result = categoryUseCase.deleteCategory(id)
-        deleteCategoryResponse = result
-    }
-
 }

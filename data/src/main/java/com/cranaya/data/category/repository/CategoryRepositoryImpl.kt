@@ -1,8 +1,11 @@
 package com.cranaya.data.category.repository
 
 import android.util.Log
+import com.cranaya.data.category.mapper.toCategory
+import com.cranaya.data.category.mapper.toCategoryEntity
 import com.cranaya.data.category.repository.dataSource.CategoriesLocalDataSource
 import com.cranaya.data.category.repository.dataSource.CategoriesRemoteDataSource
+import com.cranaya.data.shared.httpClient.config.ResponseToRequest
 import com.cranaya.domain.category.model.Category
 import com.cranaya.domain.category.repository.CategoryRepository
 import com.cranaya.domain.shared.Resource
@@ -12,6 +15,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
 import java.io.File
 import java.lang.Exception
 
@@ -20,30 +24,36 @@ class CategoryRepositoryImpl(
     private val categoriesLocalDataSource: CategoriesLocalDataSource
 ): CategoryRepository {
 
-    override suspend fun create(category: Category, file: File): Resource<Category> = categoriesRemoteDataSource.create(category = category, file = file)
+    override suspend fun create(category: Category, file: File): Resource<Category> {
+        categoriesRemoteDataSource.create(category = category, file = file).run {
+            return when(this) {
+                is Resource.Success -> {
+                    categoriesLocalDataSource.create(this.data)
+                    Resource.Success(this.data)
+                } else -> {
+                    Resource.Failure("Ocurrio un error desconocido, por favor vuelvelo a internar")
+                }
+            }
+        }
+    }
 
-    override suspend fun getCategories(): Flow<Resource<List<Category>>> = flow {
+    override fun getCategories(): Flow<Resource<List<Category>>> = flow {
         categoriesLocalDataSource.getCategories().collect {
             it.run {
                 val categoriesLocal = this
-                Log.d("CategoryRepositoryImpl", "getCategories 1: $categoriesLocal")
                 try {
                     categoriesRemoteDataSource.getCategories().run {
                         when (this) {
                             is Resource.Success -> {
                                 val categoriesRemote = this.data
-
                                 if (!isListEqual(categoriesRemote, categoriesLocal)) {
-                                    Log.d("CategoryRepositoryImpl", "getCategories 2: $categoriesRemote")
                                     categoriesLocalDataSource.insertAll(categoriesRemote)
                                 }
                                 emit(Resource.Success(categoriesRemote))
                             }
-
                             is Resource.Failure -> {
                                 emit(Resource.Success(categoriesLocal))
                             }
-
                             else -> {
                                 emit(Resource.Success(categoriesLocal))
                             }
@@ -76,7 +86,16 @@ class CategoryRepositoryImpl(
     ): Resource<Category> = categoriesRemoteDataSource.updateWithImage(id, category, file)
 
     override suspend fun delete(id: String): Resource<Unit> {
-        TODO("Not yet implemented")
+        categoriesRemoteDataSource.delete(id).run {
+            return when(this) {
+                is Resource.Success -> {
+                    categoriesLocalDataSource.delete(id)
+                    Resource.Success(Unit)
+                } else -> {
+                    Resource.Failure("Ocurrio un error desconocido, por favor vuelvelo a internar")
+                }
+            }
+        }
     }
 
 }

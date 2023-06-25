@@ -1,8 +1,10 @@
 package com.cranaya.data.category.repository.dataSource
 
+import com.cranaya.data.category.model.CategoryDto
 import com.cranaya.domain.category.model.Category
 import com.cranaya.domain.shared.Resource
 import kotlinx.coroutines.flow.Flow
+import retrofit2.Response
 import java.io.File
 
 interface CategoriesRemoteDataSource {

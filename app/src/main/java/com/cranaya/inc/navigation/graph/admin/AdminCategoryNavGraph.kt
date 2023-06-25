@@ -12,6 +12,8 @@ import com.cranaya.inc.navigation.screen.roles.RolesScreen
 import com.cranaya.inc.screens.admin.categotry.create.AdminCategoryCreateScreen
 import com.cranaya.inc.screens.admin.categotry.update.AdminCategoryUpdateScreen
 import com.cranaya.inc.screens.admin.home.AdminHomeScreen
+import com.cranaya.inc.screens.admin.product.create.AdminProductCreateScreen
+import com.cranaya.inc.screens.admin.product.list.AdminProductListScreen
 import com.cranaya.inc.screens.client.home.ClientHomeScreen
 import com.cranaya.inc.screens.roles.RolesScreen
 
@@ -35,6 +37,28 @@ fun NavGraphBuilder.AdminCategoryNavGraph(navController: NavHostController) {
                 AdminCategoryUpdateScreen(navController = navController, categoryParam = category)
             }
 
+        }
+
+        composable(
+            route = AdminCategoryScreen.ProductList.route,
+            arguments = listOf(navArgument("category"){
+                type = NavType.StringType
+            })
+        ) {
+            it.arguments?.getString("category")?.let { category ->
+                AdminProductListScreen(navController = navController, categoryParam = category)
+            }
+        }
+
+        composable(
+            route = AdminCategoryScreen.ProductCreate.route,
+            arguments = listOf(navArgument("category"){
+                type = NavType.StringType
+            })
+        ) {
+            it.arguments?.getString("category")?.let { category ->
+                AdminProductCreateScreen(navController = navController, categoryParam = category)
+            }
         }
     }
 }

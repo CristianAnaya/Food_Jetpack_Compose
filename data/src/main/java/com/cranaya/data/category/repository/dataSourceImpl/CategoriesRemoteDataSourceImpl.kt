@@ -1,19 +1,13 @@
 package com.cranaya.data.category.repository.dataSourceImpl
 
-import android.util.Log
 import com.cranaya.data.category.mapper.toCategory
 import com.cranaya.data.category.mapper.toCategoryDto
 import com.cranaya.data.category.repository.dataSource.CategoriesRemoteDataSource
 import com.cranaya.data.category.service.CategoriesService
 import com.cranaya.data.shared.httpClient.config.ResponseToRequest
-import com.cranaya.data.user.mapper.toUser
 import com.cranaya.domain.category.model.Category
 import com.cranaya.domain.shared.Resource
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.cancel
-import kotlinx.coroutines.channels.awaitClose
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.withContext
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -54,7 +48,6 @@ class CategoriesRemoteDataSourceImpl(private val categoriesService: CategoriesSe
         val service = categoriesService.update(id = id, category = category.toCategoryDto())
 
         return ResponseToRequest.send(service) {
-            Log.d("CategoriesRemoteDataSourceImpl", "update: ${it.toCategory()}")
             it.toCategory()
         }
     }
@@ -88,6 +81,6 @@ class CategoriesRemoteDataSourceImpl(private val categoriesService: CategoriesSe
     }
 
     override suspend fun delete(id: String): Resource<Unit> {
-        TODO("Not yet implemented")
+        return ResponseToRequest.send(categoriesService.delete(id))
     }
 }

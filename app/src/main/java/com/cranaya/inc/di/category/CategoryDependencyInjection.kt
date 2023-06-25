@@ -3,6 +3,7 @@ package com.cranaya.inc.di.category
 import com.cranaya.domain.category.repository.CategoryRepository
 import com.cranaya.domain.category.usecase.CategoryUseCase
 import com.cranaya.domain.category.usecase.CreateCategoryUseCase
+import com.cranaya.domain.category.usecase.DeleteCategoryUseCase
 import com.cranaya.domain.category.usecase.GetCategoryUseCase
 import com.cranaya.domain.category.usecase.UpdateCategoryUseCase
 import com.cranaya.domain.category.usecase.UpdateCategoryWithImageUseCase
@@ -21,7 +22,8 @@ object CategoryDependencyInjection {
         createCategory = CreateCategoryUseCase(categoryRepository = categoryRepository),
         getCategory = GetCategoryUseCase(categoryRepository = categoryRepository),
         updateCategory = UpdateCategoryUseCase(categoryRepository = categoryRepository),
-        updateCategoryWithImage = UpdateCategoryWithImageUseCase(categoryRepository = categoryRepository)
+        updateCategoryWithImage = UpdateCategoryWithImageUseCase(categoryRepository = categoryRepository),
+        deleteCategory = DeleteCategoryUseCase(categoryRepository = categoryRepository)
     )
 
 }

@@ -20,19 +20,26 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.cranaya.domain.category.model.Category
 import com.cranaya.inc.R
 import com.cranaya.inc.navigation.screen.admin.AdminCategoryScreen
+import com.cranaya.inc.screens.admin.categotry.list.AdminCategoryListViewModel
 
 @Composable
-fun AdminCategoryListItem(navController: NavHostController, category: Category) {
+fun AdminCategoryListItem(
+    navController: NavHostController,
+    category: Category,
+    viewModel: AdminCategoryListViewModel = hiltViewModel()
+) {
 
     Column(
         Modifier
             .padding(start = 20.dp, end = 20.dp, top = 15.dp)
             .height(90.dp)
+            .clickable { navController.navigate(route = AdminCategoryScreen.ProductList.passCategory(category.toJson())) }
     ) {
         Row() {
 
@@ -84,7 +91,9 @@ fun AdminCategoryListItem(navController: NavHostController, category: Category) 
                 Spacer(modifier = Modifier.height(5.dp))
 
                 Image(
-                    modifier = Modifier.size(25.dp),
+                    modifier = Modifier
+                        .size(25.dp)
+                        .clickable { viewModel.deleteCategory(category.id ?: "") },
                     painter = painterResource(id = R.drawable.trash),
                     contentDescription = "trash category"
                 )
