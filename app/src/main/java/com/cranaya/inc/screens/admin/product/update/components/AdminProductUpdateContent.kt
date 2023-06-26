@@ -1,4 +1,4 @@
-package com.cranaya.inc.screens.admin.product.create.components
+package com.cranaya.inc.screens.admin.product.update.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.icons.Icons
@@ -33,18 +32,17 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.SavedStateHandle
 import coil.compose.AsyncImage
 import com.cranaya.inc.R
 import com.cranaya.inc.components.DefaultButton
 import com.cranaya.inc.components.DefaultTextField
 import com.cranaya.inc.components.DialogCapturePicture
-import com.cranaya.inc.screens.admin.product.create.AdminProductCreateViewModel
+import com.cranaya.inc.screens.admin.product.update.AdminProductUpdateViewModel
 
 @Composable
-fun AdminProductCreateContent(
+fun AdminProductUpdateContent(
     paddingValues: PaddingValues,
-    viewModel: AdminProductCreateViewModel = hiltViewModel(),
+    viewModel: AdminProductUpdateViewModel = hiltViewModel(),
 ) {
     val state = viewModel.state
     val stateDialog = remember { mutableStateOf(false) }
@@ -142,12 +140,6 @@ fun AdminProductCreateContent(
 
             Column(modifier = Modifier.padding(20.dp)) {
 
-                Text(
-                    text = viewModel.category.name,
-                    fontSize = 17.sp,
-                    fontWeight = FontWeight.Bold
-                )
-
                 DefaultTextField(
                     modifier = Modifier.fillMaxWidth(),
                     value = state.name,
@@ -182,8 +174,8 @@ fun AdminProductCreateContent(
 
                 DefaultButton(
                     modifier = Modifier.fillMaxWidth(),
-                    text = "Crear producto",
-                    onClick = { viewModel.createProduct() }
+                    text = "Actualizar producto",
+                    onClick = { viewModel.updateProduct() }
                 )
             }
         }

@@ -15,6 +15,8 @@ import com.cranaya.inc.components.DefaultTopBar
 import com.cranaya.inc.navigation.Graph
 import com.cranaya.inc.navigation.screen.admin.AdminCategoryScreen
 import com.cranaya.inc.screens.admin.product.list.components.AdminProductListContent
+import com.cranaya.inc.screens.admin.product.list.components.DeleteProduct
+import com.cranaya.inc.screens.admin.product.list.components.GetProducts
 
 @Composable
 fun AdminProductListScreen(navController: NavHostController, categoryParam: String) {
@@ -40,7 +42,8 @@ fun AdminProductListScreen(navController: NavHostController, categoryParam: Stri
             }
         }
     ) {
-        AdminProductListContent(paddingValues = it)
+        GetProducts(navController = navController, paddingValues = it)
+        DeleteProduct()
     }
 
 }

@@ -1,6 +1,6 @@
-package com.cranaya.data.category.service
+package com.cranaya.data.category.httpclient.service
 
-import com.cranaya.data.category.model.CategoryDto
+import com.cranaya.data.category.httpclient.dto.CategoryDto
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response

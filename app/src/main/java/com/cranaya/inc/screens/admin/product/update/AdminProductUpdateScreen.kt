@@ -1,4 +1,4 @@
-package com.cranaya.inc.screens.admin.product.create
+package com.cranaya.inc.screens.admin.product.update
 
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -6,23 +6,28 @@ import androidx.navigation.NavHostController
 import com.cranaya.inc.components.DefaultTopBar
 import com.cranaya.inc.screens.admin.product.create.components.AdminProductCreateContent
 import com.cranaya.inc.screens.admin.product.create.components.CreateProduct
+import com.cranaya.inc.screens.admin.product.update.components.AdminProductUpdateContent
+import com.cranaya.inc.screens.admin.product.update.components.UpdateProduct
 import com.cranaya.inc.ui.theme.Gray200
 
 @Composable
-fun AdminProductCreateScreen(navController: NavHostController, categoryParam: String) {
+fun AdminProductUpdateScreen(
+    navController: NavHostController,
+    productParam: String
+) {
     
     Scaffold(
         topBar = {
             DefaultTopBar(
-                title = "Crear productos",
+                title = "Actualizar producto",
                 upAvailable = true,
                 navController = navController
             )
         },
         containerColor = Gray200
     ) {
-        AdminProductCreateContent(paddingValues = it)
+        AdminProductUpdateContent(paddingValues = it)
     }
 
-    CreateProduct()
+    UpdateProduct()
 }

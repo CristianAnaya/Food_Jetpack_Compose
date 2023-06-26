@@ -1,4 +1,4 @@
-package com.cranaya.inc.screens.admin.product.create
+package com.cranaya.inc.screens.admin.product.update
 
 import android.content.Context
 import androidx.compose.runtime.getValue
@@ -9,11 +9,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cranaya.domain.category.model.Category
 import com.cranaya.domain.product.model.Product
-import com.cranaya.domain.product.usecase.CreateProductUseCase
 import com.cranaya.domain.product.usecase.ProductUseCase
 import com.cranaya.domain.shared.Resource
-import com.cranaya.inc.screens.admin.categotry.create.AdminCategoryCreateState
-import com.cranaya.inc.screens.admin.product.create.mapper.toProduct
+import com.cranaya.inc.screens.admin.product.update.mapper.toProduct
 import com.cranaya.inc.util.ComposeFileProvider
 import com.cranaya.inc.util.ResultingActivityHandler
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -23,30 +21,35 @@ import java.io.File
 import javax.inject.Inject
 
 @HiltViewModel
-class AdminProductCreateViewModel @Inject constructor(
+class AdminProductUpdateViewModel @Inject constructor(
     @ApplicationContext private val context: Context,
     private val savedStateHandle: SavedStateHandle,
     private val productUseCase: ProductUseCase
 ): ViewModel() {
 
-    var state by mutableStateOf(AdminProductCreateState())
+    var state by mutableStateOf(AdminProductUpdateState())
         private set
 
     var productResponse by mutableStateOf<Resource<Product>?>(null)
         private set
 
-    var file1: File? = null
-    var file2: File? = null
-    var files: List<File> = listOf()
+    private var file1: File? = null
+    private var file2: File? = null
+    private var files: MutableList<File> = mutableListOf()
 
     val resultingActivityHandler = ResultingActivityHandler()
 
-    var data = savedStateHandle.get<String>("category")
-    var category = Category.fromJson(data!!)
+    private var data = savedStateHandle.get<String>("product")
+    private var product = Product.fromJson(data!!)
 
     init {
         state = state.copy(
-            idCategory = category.id ?: ""
+            name = product.name,
+            description = product.description,
+            price = product.price,
+            idCategory = product.idCategory,
+            image1 =  product.image1 ?: "",
+            image2 = product.image2 ?: ""
         )
     }
 
@@ -56,9 +59,11 @@ class AdminProductCreateViewModel @Inject constructor(
             if (imageNumber == 1) {
                 file1 = ComposeFileProvider.createFileFromUri(context, result)
                 state = state.copy(image1 = result.toString())
+                files.add(file1!!)
             } else if (imageNumber == 2) {
                 file2 = ComposeFileProvider.createFileFromUri(context, result)
                 state = state.copy(image2 = result.toString())
+                files.add(file2!!)
             }
         }
     }
@@ -69,32 +74,38 @@ class AdminProductCreateViewModel @Inject constructor(
             if (imageNumber == 1) {
                 state = state.copy(image1 = ComposeFileProvider.getPathFromBitmap(context, result))
                 file1 = File(state.image1)
+                files.add(file1!!)
             } else if (imageNumber == 2) {
                 state = state.copy(image2 = ComposeFileProvider.getPathFromBitmap(context, result))
                 file2 = File(state.image2)
+                files.add(file2!!)
             }
         }
     }
 
-    fun createProduct() = viewModelScope.launch {
-        if (file1 != null && file2 != null) {
-            files = listOf(file1!!, file2!!)
+    fun updateProduct() = viewModelScope.launch {
+        if (file1 == null && file2 == null) {
             productResponse = Resource.Loading
-            val result = productUseCase.createProduct(state.toProduct(), files)
+            val result = productUseCase.updateProduct(product.id ?: "", state.toProduct())
+            productResponse = result
+        } else {
+            if (file1 != null) {
+                files.add(file1!!)
+                state.imagesToUpdate.add(0)
+            }
+            if (file2 != null) {
+                files.add(file2!!)
+                state.imagesToUpdate.add(1)
+            }
+
+            val result = productUseCase.updateProductWithImage(product.id ?: "", state.toProduct(), files.toList())
             productResponse = result
         }
-    }
 
-    fun clearForm() {
-        state = state.copy(
-            name = "",
-            description = "",
-            image1 = "",
-            image2 = "",
-            price = 0.0
-        )
-
-        productResponse = null
+        files.clear()
+        file1 = null
+        file2 = null
+        state.imagesToUpdate.clear()
     }
 
     fun onNameInput(input: String) {

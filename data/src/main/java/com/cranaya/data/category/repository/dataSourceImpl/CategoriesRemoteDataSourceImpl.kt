@@ -3,7 +3,7 @@ package com.cranaya.data.category.repository.dataSourceImpl
 import com.cranaya.data.category.mapper.toCategory
 import com.cranaya.data.category.mapper.toCategoryDto
 import com.cranaya.data.category.repository.dataSource.CategoriesRemoteDataSource
-import com.cranaya.data.category.service.CategoriesService
+import com.cranaya.data.category.httpclient.service.CategoriesService
 import com.cranaya.data.shared.httpClient.config.ResponseToRequest
 import com.cranaya.domain.category.model.Category
 import com.cranaya.domain.shared.Resource

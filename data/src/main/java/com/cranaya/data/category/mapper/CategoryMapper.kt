@@ -1,6 +1,6 @@
 package com.cranaya.data.category.mapper
 
-import com.cranaya.data.category.model.CategoryDto
+import com.cranaya.data.category.httpclient.dto.CategoryDto
 import com.cranaya.data.category.persistence.entity.CategoryEntity
 import com.cranaya.domain.category.model.Category
 

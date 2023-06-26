@@ -11,7 +11,7 @@ import com.cranaya.data.category.repository.dataSource.CategoriesLocalDataSource
 import com.cranaya.data.category.repository.dataSource.CategoriesRemoteDataSource
 import com.cranaya.data.category.repository.dataSourceImpl.CategoriesRemoteDataSourceImpl
 import com.cranaya.data.category.repository.dataSourceImpl.CategoryLocalDataSourceImpl
-import com.cranaya.data.category.service.CategoriesService
+import com.cranaya.data.category.httpclient.service.CategoriesService
 import com.cranaya.data.shared.database.DeliveryDB
 import com.cranaya.domain.auth.repository.AuthRepository
 import com.cranaya.domain.category.repository.CategoryRepository

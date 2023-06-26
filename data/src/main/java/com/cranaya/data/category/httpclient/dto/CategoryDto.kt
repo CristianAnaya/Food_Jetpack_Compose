@@ -1,10 +1,7 @@
-package com.cranaya.data.category.model
+package com.cranaya.data.category.httpclient.dto
 
-import com.cranaya.data.auth.model.dto.AuthDto
 import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
-import java.net.URLEncoder
-import java.nio.charset.StandardCharsets
 
 data class CategoryDto(
     @SerializedName("id") val id: String? = null,

@@ -11,8 +11,11 @@ sealed class AdminCategoryScreen(val route: String) {
         fun passCategory(category: String) = "admin/category/products/list/$category"
     }
 
-
     object ProductCreate: AdminCategoryScreen("admin/category/products/create/{category}") {
         fun passCategory(category: String) = "admin/category/products/create/$category"
+    }
+
+    object ProductUpdate: AdminCategoryScreen("admin/category/products/update/{product}") {
+        fun passProduct(product: String) = "admin/category/products/update/$product"
     }
 }
