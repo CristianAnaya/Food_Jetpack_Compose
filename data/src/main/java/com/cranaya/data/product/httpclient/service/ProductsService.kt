@@ -20,6 +20,9 @@ interface ProductsService {
         @Path("id_category") idCategory: String
     ): Response<List<ProductDto>>
 
+    @GET("products}")
+    suspend fun finAll(): Response<List<ProductDto>>
+
     @Multipart
     @POST("products")
     suspend fun create(

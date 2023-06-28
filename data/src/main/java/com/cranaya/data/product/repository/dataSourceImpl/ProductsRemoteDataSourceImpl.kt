@@ -20,7 +20,11 @@ import java.io.File
 class ProductsRemoteDataSourceImpl constructor(private val productsService: ProductsService): ProductsRemoteDataSource {
 
     override suspend fun findAll(): Resource<List<Product>> {
-        TODO("Not yet implemented")
+        val service = productsService.finAll()
+
+        return ResponseToRequest.send(service) { productsDto ->
+            productsDto.map { it.toProduct() }
+        }
     }
 
     override suspend fun findByCategory(idCategory: String): Resource<List<Product>> {
@@ -98,7 +102,6 @@ class ProductsRemoteDataSourceImpl constructor(private val productsService: Prod
 
     override suspend fun update(id: String, product: Product): Resource<Product> {
         val service = productsService.update(id, product.toProductDto())
-        Log.d("ProductsRemoteDataSourceImpl", "update: $service")
         return ResponseToRequest.send(service) {
             it.toProduct()
         }

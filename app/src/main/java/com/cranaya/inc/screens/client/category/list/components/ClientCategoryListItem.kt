@@ -1,5 +1,6 @@
 package com.cranaya.inc.screens.client.category.list.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -18,12 +19,17 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.cranaya.domain.category.model.Category
+import com.cranaya.inc.navigation.screen.client.ClientCategoryScreen
 
 @Composable
 fun ClientCategoryListItem(navController: NavHostController, category: Category) {
 
     Card(
-        modifier = Modifier.padding(bottom = 15.dp),
+        modifier = Modifier
+            .padding(bottom = 15.dp)
+            .clickable {
+                navController.navigate(route = ClientCategoryScreen.ProductList.passCategory(category.toJson()))
+            },
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
         shape = RoundedCornerShape(20.dp)
     ) {

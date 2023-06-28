@@ -87,6 +87,11 @@ dependencies {
 
     // FILES TRANSFORMATION
     implementation "commons-io:commons-io:2.7"
+
+    // CAROUSEL OF IMAGE
+    implementation "com.google.accompanist:accompanist-pager:0.22.0-rc"
+    implementation "com.google.accompanist:accompanist-pager-indicators:0.22.0-rc"
+
 }
 
 kapt {

@@ -19,9 +19,35 @@ class ProductRepositoryImpl constructor(
     private val productsLocalDataSource: ProductsLocalDataSource
 ): ProductsRepository {
 
-    override fun findAll(): Flow<Resource<List<Product>>> {
-        TODO("Not yet implemented")
-    }
+    override fun findAll(): Flow<Resource<List<Product>>> = flow {
+        productsLocalDataSource.getProducts().collect {
+            it.run {
+                val productsLocalMap = this
+                try {
+                    productsRemoteDataSource.findAll().run {
+                        when (this) {
+                            is Resource.Success -> {
+                                val productsRemote = this.data
+
+                                if (!isListEqual(productsRemote, productsLocalMap)) {
+                                    productsLocalDataSource.insertAll(productsRemote)
+                                }
+
+                                emit(Resource.Success(productsRemote))
+                            }
+                            else -> {
+                                emit(Resource.Failure("Ocurrio un error desconocido"))
+                                emit(Resource.Success(productsLocalMap))
+                            }
+                        }
+                    }
+                } catch (e: Exception) {
+                    emit(Resource.Failure(e.message!!))
+                    emit(Resource.Success(productsLocalMap))
+                }
+            }
+        }
+    }.flowOn(Dispatchers.IO)
 
     override fun findByCategory(idCategory: String): Flow<Resource<List<Product>>> = flow {
         productsLocalDataSource.findByCategory(idCategory).collect {

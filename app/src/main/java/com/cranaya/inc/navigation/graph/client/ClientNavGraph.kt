@@ -22,7 +22,7 @@ fun ClientNavGraph(
     ) {
 
         composable(route = ClientScreen.ProductList.route) {
-            ClientProductListScreen()
+            ClientProductListScreen(navController = navController)
         }
 
         composable(route = ClientScreen.CategoryList.route) {
@@ -34,6 +34,9 @@ fun ClientNavGraph(
         }
 
         ProfileNavGraph(navController = navController)
+        ClientCategoryNavGraph(navController = navController)
+        ClientProductNavGraph(navController = navController)
+        ShoppingBagNavGraph(navController = navController)
     }
 
 }
