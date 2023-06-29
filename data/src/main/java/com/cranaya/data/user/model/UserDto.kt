@@ -1,6 +1,8 @@
 package com.cranaya.data.user.model
 
+import com.cranaya.data.address.httpclient.dto.AddressDto
 import com.cranaya.data.auth.model.dto.RolDto
+import com.cranaya.domain.address.model.Address
 import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
 
@@ -13,7 +15,9 @@ data class UserDto(
     @SerializedName("image") val image: String? = null,
     @SerializedName("password") val password: String? = null,
     @SerializedName("notification_token") val notificationToken: String? = null,
-    @SerializedName("roles") val roles: List<RolDto>? = null
+    @SerializedName("roles") val roles: List<RolDto>? = null,
+    @SerializedName("address") val addressDto: AddressDto? = null
+
 ) {
     fun toJson(): String = Gson().toJson(this)
 

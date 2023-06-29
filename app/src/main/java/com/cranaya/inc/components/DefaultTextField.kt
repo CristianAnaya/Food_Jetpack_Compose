@@ -15,6 +15,8 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.sp
 import com.cranaya.inc.ui.theme.Blue500
 import com.cranaya.inc.ui.theme.RedworkTheme
 
@@ -26,7 +28,8 @@ fun DefaultTextField(
     label: String,
     icon: ImageVector,
     keyboardType: KeyboardType = KeyboardType.Text,
-    hideText: Boolean = false
+    hideText: Boolean = false,
+    fontSize: TextUnit = 15.sp
 ) {
     OutlinedTextField(
         modifier = modifier,
@@ -35,7 +38,10 @@ fun DefaultTextField(
             onValueChange(it)
         },
         label = {
-            Text(text = label)
+            Text(
+                text = label,
+                fontSize = fontSize
+            )
         },
         leadingIcon = {
             Icon(

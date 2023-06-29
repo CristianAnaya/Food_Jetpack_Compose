@@ -1,5 +1,6 @@
 package com.cranaya.domain.user.model
 
+import com.cranaya.domain.address.model.Address
 import com.cranaya.domain.auth.model.Rol
 import com.google.gson.Gson
 import java.io.Serializable
@@ -14,7 +15,8 @@ data class User(
     var phone: String,
     val password: String? = null,
     var image: String? = null,
-    val roles: List<Rol>? = null
+    val roles: List<Rol>? = null,
+    var address: Address? = null
 ): Serializable {
     fun toJson(): String = Gson().toJson(User(
         id,
@@ -24,7 +26,8 @@ data class User(
         phone,
         password,
         if (!image.isNullOrBlank()) URLEncoder.encode(image, StandardCharsets.UTF_8.toString()) else "",
-        roles?.map { rol -> Rol.fromJson(rol.toJson()) }
+        roles?.map { rol -> Rol.fromJson(rol.toJson()) },
+        address
     ))
 
     companion object {

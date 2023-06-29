@@ -24,9 +24,9 @@ class ClientShoppingBagViewModel @Inject constructor(
     var total by mutableStateOf(0.0)
         private set
 
-    init {
-        getShoppingBag()
-    }
+//    init {
+//        getShoppingBag()
+//    }
 
     private fun getTotal() {
         total = 0.0
@@ -35,7 +35,7 @@ class ClientShoppingBagViewModel @Inject constructor(
         }
     }
 
-    private fun getShoppingBag() = viewModelScope.launch {
+    fun getShoppingBag() = viewModelScope.launch {
         shoppingBagUseCase.findAll().collect {
             shoppingBags.clear()
             shoppingBags.addAll(it)

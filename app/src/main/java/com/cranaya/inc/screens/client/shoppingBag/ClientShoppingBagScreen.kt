@@ -19,11 +19,16 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.cranaya.inc.components.DefaultButton
 import com.cranaya.inc.components.DefaultTopBar
+import com.cranaya.inc.navigation.screen.client.ShoppingBagScreen
+import com.cranaya.inc.screens.client.shoppingBag.components.ClientShoppingBagBottomBar
 import com.cranaya.inc.screens.client.shoppingBag.components.ClientShoppingBagContent
 import com.cranaya.inc.ui.theme.Gray100
 
 @Composable
 fun ClientShoppingBagScreen(navController: NavHostController, viewModel: ClientShoppingBagViewModel = hiltViewModel()) {
+
+    viewModel.getShoppingBag()
+
     Scaffold(
         topBar = {
             DefaultTopBar(
@@ -33,37 +38,7 @@ fun ClientShoppingBagScreen(navController: NavHostController, viewModel: ClientS
             )
         },
         bottomBar = {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .background(color = Gray100),
-                horizontalArrangement = Arrangement.SpaceEvenly,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Column(
-                    modifier = Modifier.padding(vertical = 15.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    Text(
-                        text = "Total",
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 17.sp
-                    )
-
-                    Text(
-                        text = viewModel.total.toString() + "$",
-                        fontSize = 17.sp
-                    )
-                }
-
-                DefaultButton(
-                    modifier = Modifier
-                        .width(150.dp)
-                        .padding(vertical = 15.dp),
-                    text = "Confirmar orden",
-                    onClick = {  }
-                )
-            }
+            ClientShoppingBagBottomBar(navController = navController)
         }
     ) {
         ClientShoppingBagContent(paddingValues = it, viewModel.shoppingBags)

@@ -7,6 +7,9 @@ import androidx.navigation.navigation
 import com.cranaya.inc.navigation.Graph
 import com.cranaya.inc.navigation.screen.client.ClientCategoryScreen
 import com.cranaya.inc.navigation.screen.client.ShoppingBagScreen
+import com.cranaya.inc.screens.client.address.create.ClientAddressCreateScreen
+import com.cranaya.inc.screens.client.address.list.ClientAddressListScreen
+import com.cranaya.inc.screens.client.payments.form.ClientPaymentsFormScreen
 import com.cranaya.inc.screens.client.shoppingBag.ClientShoppingBagScreen
 
 
@@ -19,6 +22,18 @@ fun NavGraphBuilder.ShoppingBagNavGraph(navController: NavHostController) {
             route = ShoppingBagScreen.ShoppingBag.route,
         ) {
             ClientShoppingBagScreen(navController = navController)
+        }
+
+        composable(
+            route = ShoppingBagScreen.AddressList.route,
+        ) {
+            ClientAddressListScreen(navController = navController)
+        }
+
+        composable(
+            route = ShoppingBagScreen.PaymentsForm.route,
+        ) {
+            ClientPaymentsFormScreen(navController = navController)
         }
     }
 }

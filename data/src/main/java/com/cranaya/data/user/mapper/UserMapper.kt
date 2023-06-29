@@ -1,5 +1,7 @@
 package com.cranaya.data.user.mapper
 
+import com.cranaya.data.address.mapper.toAddress
+import com.cranaya.data.address.mapper.toAddressDto
 import com.cranaya.data.auth.mapper.toRol
 import com.cranaya.data.auth.mapper.toRolDto
 import com.cranaya.data.user.model.UserDto
@@ -13,7 +15,8 @@ fun UserDto.toUser(): User {
         email = email,
         phone = phone,
         image = image,
-        roles = roles?.map { it.toRol() }
+        roles = roles?.map { it.toRol() },
+        address = addressDto?.toAddress()
     )
 }
 
@@ -26,6 +29,7 @@ fun User.toUserDto(): UserDto {
         phone = phone,
         image = image,
         password = password,
-        roles = roles?.map { it.toRolDto() }
+        roles = roles?.map { it.toRolDto() },
+        addressDto = address?.toAddressDto()
     )
 }

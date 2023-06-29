@@ -50,6 +50,7 @@ class AuthTemporalDataSourceImpl constructor(
         auth.user?.name = user.name
         auth.user?.lastname = user.lastname
         auth.user?.phone = user.phone
+        auth.user?.address = user.address
         if (!user.image.isNullOrBlank()) auth.user?.image = user.image
 
         dataStore.edit { pref ->
