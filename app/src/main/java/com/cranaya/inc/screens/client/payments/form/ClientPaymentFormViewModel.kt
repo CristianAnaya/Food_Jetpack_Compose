@@ -24,21 +24,11 @@ class ClientPaymentFormViewModel @Inject constructor(private val mercadoPagoUseC
     var identificationTypeResponse by mutableStateOf<Resource<List<IdentificationType>>?>(null)
         private set
 
-    var installmentsResponse by mutableStateOf<Resource<Installment>?>(null)
-        private set
-
     fun getIdentificationTypes() = viewModelScope.launch {
         identificationTypeResponse = Resource.Loading
         val result = mercadoPagoUseCase.getIdentificationType().first()
         identificationTypeResponse = result
         Log.d("ClientPaymentFormViewModel", "getIdentificationTypes: $identificationTypeResponse")
-    }
-
-    fun getInstallments(firstSixDigits: Int, amount: Double) = viewModelScope.launch {
-        installmentsResponse = Resource.Loading
-        val result = mercadoPagoUseCase.getInstallments(firstSixDigits, amount).first()
-        installmentsResponse = result
-        Log.d("ClientPaymentFormViewModel", "getInstallments: $installmentsResponse")
     }
 
     fun onCardNumberInput(input: String) {

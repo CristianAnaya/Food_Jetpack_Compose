@@ -31,20 +31,25 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
 import com.cranaya.inc.components.DefaultButton
 import com.cranaya.inc.components.DefaultTextField
+import com.cranaya.inc.navigation.screen.client.ShoppingBagScreen
 import com.cranaya.inc.screens.client.payments.form.ClientPaymentFormViewModel
+import com.cranaya.inc.screens.client.payments.form.mapper.toCardTokenBody
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun ClientPaymentsFormContent(
     paddingValues: PaddingValues,
+    navController: NavHostController,
     identificationTypes: List<String>,
     viewModel: ClientPaymentFormViewModel = hiltViewModel(),
 ) {
 
     val state = viewModel.state
     var selectedItem by remember { mutableStateOf(identificationTypes[0]) }
+    viewModel.onIdentificationTypeInput(selectedItem)
     var expanded by remember { mutableStateOf(false) }
 
     Column(
@@ -132,6 +137,7 @@ fun ClientPaymentsFormContent(
                     androidx.compose.material.DropdownMenuItem(
                         onClick = {
                             selectedItem = identification
+                            viewModel.onIdentificationTypeInput(selectedItem)
                             expanded = false
                         }
                     ) {
@@ -154,7 +160,11 @@ fun ClientPaymentsFormContent(
 
         DefaultButton(modifier = Modifier.fillMaxWidth(),
             text = "Continuar",
-            onClick = {  }
+            onClick = {
+                navController.navigate(route = ShoppingBagScreen.PaymentsInstallments.passPaymentForm(state.toCardTokenBody().toJson())) {
+                    popUpTo(ShoppingBagScreen.PaymentsForm.route) { inclusive = true }
+                }
+            }
         )
 
     }

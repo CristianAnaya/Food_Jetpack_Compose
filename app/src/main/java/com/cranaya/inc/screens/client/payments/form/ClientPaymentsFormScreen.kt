@@ -25,7 +25,7 @@ fun ClientPaymentsFormScreen(
             )
         }
     ) {
-        GetIdentificationTypes(paddingValues = it)
+        GetIdentificationTypes(paddingValues = it, navController = navController)
     }
 
 }

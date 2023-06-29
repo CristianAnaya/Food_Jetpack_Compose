@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.Flow
 interface ShoppingBagRepository {
     suspend fun add(shoppingBag: ShoppingBag)
     suspend fun delete(id: String)
+    suspend fun getTotal(): Double
     fun findAll(): Flow<List<ShoppingBag>>
     suspend fun findById(id: String): ShoppingBag?
 }

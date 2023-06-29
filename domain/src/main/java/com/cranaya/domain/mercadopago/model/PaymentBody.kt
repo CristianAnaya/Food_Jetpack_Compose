@@ -1,5 +1,6 @@
 package com.cranaya.domain.mercadopago.model
 
+import com.cranaya.domain.order.model.Order
 import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
@@ -18,8 +19,8 @@ data class PaymentBody (
     @SerializedName("payment_method_id")
     val paymentMethodID: String,
 
-//    @SerializedName("order")
-//    val order: Order,
+    @SerializedName("order")
+    val order: Order,
 
     val payer: Payer
 ): Serializable {

@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
 import com.cranaya.domain.shared.Resource
 import com.cranaya.inc.components.ProgressBar
 import com.cranaya.inc.screens.client.payments.form.ClientPaymentFormViewModel
@@ -12,6 +13,7 @@ import com.cranaya.inc.screens.client.payments.form.ClientPaymentFormViewModel
 @Composable
 fun GetIdentificationTypes(
     paddingValues: PaddingValues,
+    navController: NavHostController,
     viewModel: ClientPaymentFormViewModel = hiltViewModel()
 ) {
 
@@ -22,6 +24,7 @@ fun GetIdentificationTypes(
         is Resource.Success -> {
             ClientPaymentsFormContent(
                 paddingValues = paddingValues,
+                navController = navController,
                 identificationTypes = response.data.map { identificationType -> identificationType.id }
             )
         }

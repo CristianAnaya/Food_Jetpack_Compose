@@ -27,6 +27,8 @@ class ShoppingBagRepositoryImpl(
 
     override suspend fun delete(id: String) = shoppingBagLocalDataSource.delete(id)
 
+    override suspend fun getTotal(): Double = shoppingBagLocalDataSource.getTotal()
+
     override fun findAll(): Flow<List<ShoppingBag>>  {
 
         return shoppingBagLocalDataSource.finAll()

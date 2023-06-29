@@ -6,6 +6,7 @@ import kotlinx.coroutines.flow.Flow
 interface ShoppingBagLocalDataSource {
     suspend fun create(shoppingBag: ShoppingBag)
     suspend fun insertAll(shoppingBags: List<ShoppingBag>)
+    suspend fun getTotal(): Double
     fun finAll(): Flow<List<ShoppingBag>>
     suspend fun findById(id: String): ShoppingBag?
     suspend fun update(id: String, quantity: Int)

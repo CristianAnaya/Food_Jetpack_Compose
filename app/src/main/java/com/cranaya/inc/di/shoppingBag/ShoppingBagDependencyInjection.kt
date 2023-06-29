@@ -6,6 +6,7 @@ import com.cranaya.domain.shoppingBag.usecase.AddUseCase
 import com.cranaya.domain.shoppingBag.usecase.DeleteUseCase
 import com.cranaya.domain.shoppingBag.usecase.FindAllUseCase
 import com.cranaya.domain.shoppingBag.usecase.FindByIdUseCase
+import com.cranaya.domain.shoppingBag.usecase.GetTotalUseCase
 import com.cranaya.domain.shoppingBag.usecase.ShoppingBagUseCase
 import dagger.Module
 import dagger.Provides
@@ -21,7 +22,8 @@ object ShoppingBagDependencyInjection {
         add = AddUseCase(shoppingBagRepository),
         findAll = FindAllUseCase(shoppingBagRepository),
         delete = DeleteUseCase(shoppingBagRepository),
-        findById = FindByIdUseCase(shoppingBagRepository)
+        findById = FindByIdUseCase(shoppingBagRepository),
+        getTotal = GetTotalUseCase(shoppingBagRepository)
     )
 
 }

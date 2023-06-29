@@ -1,6 +1,8 @@
 package com.cranaya.inc.di.mercadopago
 
 import com.cranaya.domain.mercadopago.repository.MercadoPagoRepository
+import com.cranaya.domain.mercadopago.usecase.CreateCardTokenUseCase
+import com.cranaya.domain.mercadopago.usecase.CreatePaymentUseCase
 import com.cranaya.domain.mercadopago.usecase.GetIdentificationTypeUseCase
 import com.cranaya.domain.mercadopago.usecase.GetInstallmentsUseCase
 import com.cranaya.domain.mercadopago.usecase.MercadoPagoUseCase
@@ -18,6 +20,8 @@ object MercadoPagoDependencyInjection {
         mercadoPagoRepository: MercadoPagoRepository
     ) = MercadoPagoUseCase(
         getIdentificationType = GetIdentificationTypeUseCase(mercadoPagoRepository),
-        getInstallments = GetInstallmentsUseCase(mercadoPagoRepository)
+        getInstallments = GetInstallmentsUseCase(mercadoPagoRepository),
+        createCardToken = CreateCardTokenUseCase(mercadoPagoRepository),
+        createPayment = CreatePaymentUseCase(mercadoPagoRepository)
     )
 }

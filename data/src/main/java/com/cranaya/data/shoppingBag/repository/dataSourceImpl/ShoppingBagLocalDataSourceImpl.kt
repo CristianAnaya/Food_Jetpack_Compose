@@ -17,6 +17,8 @@ class ShoppingBagLocalDataSourceImpl(
 
     override suspend fun insertAll(shoppingBags: List<ShoppingBag>) = shoppingBagDao.insertAll(shoppingBags.map { it.toShoppingBagEntity() })
 
+    override suspend fun getTotal(): Double = shoppingBagDao.getTotal()
+
     override fun finAll(): Flow<List<ShoppingBag>> = shoppingBagDao.findAll().map { it.map { shoppingBagEntity -> shoppingBagEntity.toShoppingBag() } }
 
     override suspend fun findById(id: String): ShoppingBag? = shoppingBagDao.findById(id)?.toShoppingBag()
