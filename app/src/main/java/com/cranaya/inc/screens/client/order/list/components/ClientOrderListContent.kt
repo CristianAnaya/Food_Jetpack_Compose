@@ -1,4 +1,4 @@
-package com.cranaya.inc.screens.admin.order.list.components
+package com.cranaya.inc.screens.client.order.list.components
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,7 +12,7 @@ import androidx.navigation.NavHostController
 import com.cranaya.domain.order.model.Order
 
 @Composable
-fun AdminOrderListContent(
+fun ClientOrderListContent(
     paddingValues: PaddingValues,
     orders: List<Order>,
     navController: NavHostController
@@ -27,10 +27,7 @@ fun AdminOrderListContent(
         items(
             items = orders
         ) {
-            AdminOrderListItem(
-                order = it,
-                navController
-            )
+            ClientOrderListItem(order = it, navController)
         }
     }
 

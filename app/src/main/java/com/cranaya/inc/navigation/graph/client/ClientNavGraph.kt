@@ -8,6 +8,7 @@ import com.cranaya.inc.navigation.Graph
 import com.cranaya.inc.navigation.graph.profile.ProfileNavGraph
 import com.cranaya.inc.navigation.screen.client.ClientScreen
 import com.cranaya.inc.screens.client.category.list.ClientCategoryListScreen
+import com.cranaya.inc.screens.client.order.list.ClientOrderListScreen
 import com.cranaya.inc.screens.client.product.list.ClientProductListScreen
 import com.cranaya.inc.screens.profile.info.ProfileScreen
 
@@ -29,6 +30,10 @@ fun ClientNavGraph(
             ClientCategoryListScreen(navController = navController)
         }
 
+        composable(route = ClientScreen.OrderList.route) {
+            ClientOrderListScreen(navController = navController)
+        }
+
         composable(route = ClientScreen.Profile.route) {
             ProfileScreen(navController = navController)
         }
@@ -37,6 +42,7 @@ fun ClientNavGraph(
         ClientCategoryNavGraph(navController = navController)
         ClientProductNavGraph(navController = navController)
         ShoppingBagNavGraph(navController = navController)
+        ClientOrderNavGraph(navController = navController)
     }
 
 }

@@ -1,18 +1,18 @@
-package com.cranaya.inc.screens.admin.order.list
+package com.cranaya.inc.screens.client.order.list
 
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import com.cranaya.inc.screens.admin.order.list.components.GetOrders
+import com.cranaya.inc.screens.client.order.list.components.GetOrders
 
 @Composable
-fun AdminOrderListScreen(
+fun ClientOrderListScreen(
     navController: NavHostController,
-    viewModel: AdminOrderListViewModel = hiltViewModel()
+    viewModel: ClientOrderListViewModel = hiltViewModel()
 ) {
     
-    viewModel.getOrders()
+    viewModel.getSessionData()
 
     Scaffold {
         GetOrders(paddingValues = it, navController = navController)
