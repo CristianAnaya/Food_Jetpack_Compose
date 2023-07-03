@@ -35,6 +35,14 @@ class ProductsRemoteDataSourceImpl constructor(private val productsService: Prod
         }
     }
 
+    override suspend fun findByName(name: String): Resource<List<Product>> {
+        val service = productsService.findByName(name)
+
+        return ResponseToRequest.send(service) { productsDto ->
+            productsDto.map { it.toProduct() }
+        }
+    }
+
     override suspend fun create(product: Product, files: List<File>): Resource<Product> {
 
         val images = arrayOfNulls<MultipartBody.Part>(files.size)

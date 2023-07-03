@@ -20,6 +20,11 @@ interface ProductsService {
         @Path("id_category") idCategory: String
     ): Response<List<ProductDto>>
 
+    @GET("products/search/{name}")
+    suspend fun findByName(
+        @Path("name") name: String
+    ): Response<List<ProductDto>>
+
     @GET("products}")
     suspend fun finAll(): Response<List<ProductDto>>
 

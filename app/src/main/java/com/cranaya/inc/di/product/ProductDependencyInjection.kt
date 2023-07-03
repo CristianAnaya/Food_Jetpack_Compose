@@ -5,6 +5,7 @@ import com.cranaya.domain.product.usecase.CreateProductUseCase
 import com.cranaya.domain.product.usecase.DeleteProductUseCase
 import com.cranaya.domain.product.usecase.FindAllUseCase
 import com.cranaya.domain.product.usecase.FindByCategoryUseCase
+import com.cranaya.domain.product.usecase.FindByNameUseCase
 import com.cranaya.domain.product.usecase.ProductUseCase
 import com.cranaya.domain.product.usecase.UpdateProductUseCase
 import com.cranaya.domain.product.usecase.UpdateProductWithImageUseCase
@@ -22,6 +23,7 @@ object ProductDependencyInjection {
         createProduct = CreateProductUseCase(productsRepository = productsRepository),
         findAll = FindAllUseCase(productsRepository = productsRepository),
         findByCategory = FindByCategoryUseCase(productsRepository = productsRepository),
+        findByName = FindByNameUseCase(productsRepository = productsRepository),
         updateProduct = UpdateProductUseCase(productsRepository = productsRepository),
         updateProductWithImage = UpdateProductWithImageUseCase(productsRepository = productsRepository),
         deleteProduct = DeleteProductUseCase(productsRepository = productsRepository)

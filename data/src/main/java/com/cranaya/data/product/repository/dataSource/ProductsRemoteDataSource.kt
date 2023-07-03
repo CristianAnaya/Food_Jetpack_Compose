@@ -8,6 +8,7 @@ import java.io.File
 interface ProductsRemoteDataSource {
     suspend fun findAll(): Resource<List<Product>>
     suspend fun findByCategory(idCategory: String): Resource<List<Product>>
+    suspend fun findByName(name: String): Resource<List<Product>>
     suspend fun create(product: Product, files: List<File>): Resource<Product>
     suspend fun updateWithImage(id: String, product: Product, files: List<File>?): Resource<Product>
     suspend fun update(id: String, product: Product): Resource<Product>

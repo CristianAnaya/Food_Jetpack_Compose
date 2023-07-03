@@ -8,11 +8,9 @@ import com.cranaya.domain.shared.Resource
 import com.cranaya.domain.shared.isListEqual
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import java.io.File
-import java.lang.Exception
 
 class ProductRepositoryImpl constructor(
     private val productsRemoteDataSource: ProductsRemoteDataSource,
@@ -78,6 +76,14 @@ class ProductRepositoryImpl constructor(
             }
         }
     }.flowOn(Dispatchers.IO)
+
+    override fun findByName(name: String): Flow<Resource<List<Product>>> = flow {
+        try {
+            emit(productsRemoteDataSource.findByName(name))
+        } catch(e: Exception) {
+            emit(Resource.Failure(e.message!!))
+        }
+    }
 
     override suspend fun create(product: Product, files: List<File>): Resource<Product> {
         return try {
